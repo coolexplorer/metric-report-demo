@@ -105,9 +105,9 @@ Chart.defaults.global.legend.onClick = function(e, legendItem) {
 /* Create color array */
 /* https://codenebula.io/javascript/frontend/dataviz/2019/04/18/automatically-generate-chart-colors-with-chart-js-d3s-color-scales/ */
 var color = Chart.helpers.color;
-var colorScale = d3.interpolateInferno;
+var colorScale = d3.interpolateRainbow;
 var colorRangeInfo = {
-  colorStart: 0,
+  colorStart: 0.5,
   colorEnd: 1,
   useEndAsStart: true,
 }
@@ -131,5 +131,100 @@ function calculatePoint(i, intervalSize, colorRangeInfo) {
     : (colorRangeInfo.colorStart + (i * intervalSize)));
 }
 
-var chartColors = interpolateColors(10, colorScale, colorRangeInfo);
+// var chartColors = interpolateColors(40, colorScale, colorRangeInfo);
 
+var chartColors = [
+  '#000000', '#F000F0', '#FF0000', '#00FF00', '#0000FF', '#FFF000', '#00FFFF', '#FF00FF', '#C0C0C0', '#808080', 
+  '#800000', '#808000', '#008000', '#800080', '#008080', '#000080', '#800000', '#8B0000', '#A52A2A', '#9ACD32', 
+  '#556B2F', '#6B8E23', '#3CB371', '#20B2AA', '#2F4F4F', '#5F9EA0', '#4682B4', '#6495ED', '#4169E1', '#8A2BE2',
+  '#4B0082', '#C71585', '#DB7093', '#FF1493', '#8B4513', '#A0522D', '#D2691E', '#708090', '#778899', '#B0C4DE'
+]
+
+function getDataSet(key, index) {
+  return {
+    type: 'line',
+    label: key,
+    lineTension: 0.5,
+    backgroundColor: color(chartColors[index]).alpha(0.2).rgbString(),
+    borderColor: chartColors[index],
+    borderWidth: 0.5,
+    borderCapStyle: 'round',
+    pointHoverBorderWidth: 2,
+    pointRadius: 0.5,
+    data: cpuData[key]
+  }
+}
+
+function getChartConfig(datasets) {
+  return {
+    data: {
+        datasets: datasets,
+    },
+    options: {
+        animation: {
+            duration: 0
+        },
+        maintainAspectRatio: false,
+        layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                distribution: 'series',
+                offset: true,
+                ticks: {
+                    source: 'data',
+                    autoSkip: true,
+                    autoSkipPadding: 75,
+                    maxRotation: 0,
+                    sampleSize: 100
+                },
+            }],
+            yAxes: [{
+              type: 'linear',
+              ticks: {
+                min: 0
+              }
+            }],
+        },
+        legend: {
+            display: true,
+            position: 'right',
+            align: 'start',
+            labels: {
+                boxWidth: 10,
+                fontSize: 10,
+                fontColor: 'rgb(255, 99, 132)'
+            }
+        },
+        tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 10,
+            yPadding: 10,
+            displayColors: true,
+            intersect: false,
+            mode: 'nearest',
+            caretPadding: 10,
+            position: 'nearest',
+            callbacks: {
+                label: function (tooltipItem, chart) {
+                    var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                    return datasetLabel + ': ' + tooltipItem.yLabel;
+                }
+            }
+        }
+    }
+  }
+}
