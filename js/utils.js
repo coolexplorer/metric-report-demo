@@ -27,32 +27,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function generateData() {
-  var unit = 'hour';
-
-  function randomNumber(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  function randomBar(date, lastClose) {
-    var open = randomNumber(lastClose * 0.95, lastClose * 1.05).toFixed(2);
-    var close = randomNumber(open * 0.95, open * 1.05).toFixed(2);
-    return {
-      t: date.valueOf(),
-      y: close
-    };
-  }
-
-  var date = moment('Jan 01 1990', 'MMM DD YYYY');
-  var now = moment();
-  var data = [];
-  for (; data.length < 600 && date.isBefore(now); date = date.clone().add(1, unit).startOf(unit)) {
-    data.push(randomBar(date, data.length > 0 ? data[data.length - 1].y : 30));
-  }
-  console.log(data);
-  return data;
-}
-
+// Legend Click 
 var original = Chart.defaults.global.legend.onClick;
 Chart.defaults.global.legend.onClick = function(e, legendItem) {
   var index = legendItem.datasetIndex;
@@ -103,36 +78,7 @@ Chart.defaults.global.legend.onClick = function(e, legendItem) {
 }
 
 /* Create color array */
-/* https://codenebula.io/javascript/frontend/dataviz/2019/04/18/automatically-generate-chart-colors-with-chart-js-d3s-color-scales/ */
 var color = Chart.helpers.color;
-var colorScale = d3.interpolateRainbow;
-var colorRangeInfo = {
-  colorStart: 0.5,
-  colorEnd: 1,
-  useEndAsStart: true,
-}
-function interpolateColors(dataLength, colorScale, colorRangeInfo) {
-  var colorRange = colorRangeInfo.colorEnd - colorRangeInfo.colorStart;
-  var intervalSize = colorRange / dataLength;
-  var i, colorPoint;
-  var colorArray = [];
-
-  for (i = 0; i < dataLength; i++) {
-    colorPoint = calculatePoint(i, intervalSize, colorRangeInfo);
-    colorArray.push(colorScale(colorPoint));
-  }
-
-  return colorArray;
-}
-
-function calculatePoint(i, intervalSize, colorRangeInfo) {
-  return (colorRangeInfo.useEndAsStart
-    ? (colorRangeInfo.colorEnd - (i * intervalSize))
-    : (colorRangeInfo.colorStart + (i * intervalSize)));
-}
-
-// var chartColors = interpolateColors(40, colorScale, colorRangeInfo);
-
 var chartColors = [
   '#000000', '#F000F0', '#FF0000', '#00FF00', '#0000FF', '#FFF000', '#00FFFF', '#FF00FF', '#C0C0C0', '#808080', 
   '#800000', '#808000', '#008000', '#800080', '#008080', '#000080', '#800000', '#8B0000', '#A52A2A', '#9ACD32', 
@@ -140,6 +86,7 @@ var chartColors = [
   '#4B0082', '#C71585', '#DB7093', '#FF1493', '#8B4513', '#A0522D', '#D2691E', '#708090', '#778899', '#B0C4DE'
 ]
 
+/* Get Data Set */
 function getDataSet(key, index) {
   return {
     type: 'line',
@@ -221,7 +168,7 @@ function getChartConfig(datasets) {
             callbacks: {
                 label: function (tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return datasetLabel + ': ' + tooltipItem.yLabel;
+                    return datasetLabel + ': ' + number_format(tooltipItem.yLabel, 3);
                 }
             }
         }
