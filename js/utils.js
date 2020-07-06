@@ -105,15 +105,14 @@ Chart.defaults.global.legend.onClick = function(e, legendItem) {
 /* Create color array */
 /* https://codenebula.io/javascript/frontend/dataviz/2019/04/18/automatically-generate-chart-colors-with-chart-js-d3s-color-scales/ */
 var color = Chart.helpers.color;
-const colorScale = d3.interpolateInferno;
-const colorRangeInfo = {
+var colorScale = d3.interpolateInferno;
+var colorRangeInfo = {
   colorStart: 0,
   colorEnd: 1,
   useEndAsStart: true,
 }
 function interpolateColors(dataLength, colorScale, colorRangeInfo) {
-  var { colorStart, colorEnd } = colorRangeInfo;
-  var colorRange = colorEnd - colorStart;
+  var colorRange = colorRangeInfo.colorEnd - colorRangeInfo.colorStart;
   var intervalSize = colorRange / dataLength;
   var i, colorPoint;
   var colorArray = [];
@@ -127,10 +126,9 @@ function interpolateColors(dataLength, colorScale, colorRangeInfo) {
 }
 
 function calculatePoint(i, intervalSize, colorRangeInfo) {
-  var { colorStart, colorEnd, useEndAsStart } = colorRangeInfo;
-  return (useEndAsStart
-    ? (colorEnd - (i * intervalSize))
-    : (colorStart + (i * intervalSize)));
+  return (colorRangeInfo.useEndAsStart
+    ? (colorRangeInfo.colorEnd - (i * intervalSize))
+    : (colorRangeInfo.colorStart + (i * intervalSize)));
 }
 
 var chartColors = interpolateColors(10, colorScale, colorRangeInfo);
