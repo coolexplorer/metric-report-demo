@@ -147,7 +147,7 @@ function getDataSet(data, key, index) {
   }
 }
 
-function getChartConfig(datasets) {
+function getChartConfig(datasets, yAxeType) {
   return {
     data: {
         datasets: datasets,
@@ -181,7 +181,10 @@ function getChartConfig(datasets) {
             yAxes: [{
               type: 'linear',
               ticks: {
-                min: 0
+                min: 0,
+                callback: function(value, index, values) {
+                  return number_format(changeYAxeValue(yAxeType, value), 0) + getYAxePostfix(yAxeType);
+                }
               }
             }],
         },
@@ -213,7 +216,7 @@ function getChartConfig(datasets) {
             callbacks: {
                 label: function (tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return datasetLabel + ': ' + number_format(tooltipItem.yLabel, 3);
+                    return datasetLabel + ': ' + number_format(changeYAxeValue(yAxeType, tooltipItem.yLabel), 3) + getYAxePostfix(yAxeType);
                 }
             }
         }
@@ -224,4 +227,21 @@ function getChartConfig(datasets) {
 /* Date Converter */
 function changeDateString(isoString) {
   return moment(isoString).format("YYYY-MM-DD HH:mm")
+}
+
+/* Change Y Axe Value */
+function changeYAxeValue(yAxeType, yAxeValue) {
+  if (yAxeType == "percent") {
+    return yAxeValue * 100;
+  } else {
+    return yAxeValue / 1024;
+  }
+}
+
+function getYAxePostfix(yAxeType) {
+  if (yAxeType == "percent") {
+    return "%";
+  } else {
+    return "KB"
+  }
 }
