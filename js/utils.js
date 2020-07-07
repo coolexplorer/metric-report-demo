@@ -190,10 +190,7 @@ function getChartConfig(datasets, yAxeType) {
                   autoSkip: true,
                   autoSkipPadding: 75,
                   maxRotation: 0,
-                  sampleSize: 100,
-                  userCallback: function(item, index) {
-                    return moment.unix(item*1000).toDate();
-                  }
+                  sampleSize: 100
                 },
             }],
             yAxes: [{
