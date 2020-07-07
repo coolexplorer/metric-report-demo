@@ -170,12 +170,30 @@ function getChartConfig(datasets, yAxeType) {
                 type: 'time',
                 distribution: 'series',
                 offset: true,
+                time: {
+                  unit: 'second',
+                  tooltipFormat:'YYYY-MM-DD HH:mm:ss',
+                  displayFormats: {
+                    'millisecond':'HH:mm:ss',
+                    'second': 'HH:mm:ss',
+                    'minute': 'HH:mm:ss',
+                    'hour': 'HH:mm:ss',
+                    'day': 'HH:mm:ss',
+                    'week': 'HH:mm:ss',
+                    'month': 'HH:mm:ss',
+                    'quarter': 'HH:mm:ss',
+                    'year': 'HH:mm:ss'
+                  }
+                },
                 ticks: {
-                    source: 'data',
-                    autoSkip: true,
-                    autoSkipPadding: 75,
-                    maxRotation: 0,
-                    sampleSize: 100
+                  source: 'auto',
+                  autoSkip: true,
+                  autoSkipPadding: 75,
+                  maxRotation: 0,
+                  sampleSize: 100,
+                  userCallback: function(item, index) {
+                    return moment.unix(item*1000).toDate();
+                  }
                 },
             }],
             yAxes: [{
