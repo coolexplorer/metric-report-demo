@@ -184,3 +184,8 @@ function getChartConfig(datasets) {
     }
   }
 }
+
+/* Date Converter */
+function changeDateString(isoString) {
+  return moment(isoString).format("YYYY-MM-DD HH:mm")
+}

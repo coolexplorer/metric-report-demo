@@ -104,7 +104,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Milestone</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">MS15</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="milestone"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -121,7 +121,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">User Counts</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">50,000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCCU"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -138,7 +138,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Start Time</div>
-                      <div class="h8 mb-0 mr-3 font-weight-bold text-gray-800">2020. 6. 28 13:10</div>
+                      <div class="h8 mb-0 mr-3 font-weight-bold text-gray-800" id="testStartTime"></div>
                     </div>
                     <div class="col-auto">
                       <i class="far fa-calendar-alt fa-2x text-gray-300"></i>
@@ -154,8 +154,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Duration</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">300</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Duration (min)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="duration"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-hourglass-end   fa-2x text-gray-300"></i>
@@ -404,6 +404,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
+  <script src="data/test_profile.js"></script>
   <script src="data/cpu.js"></script>
   <script src="data/cpu_max.js"></script>
   <script src="data/memory.js"></script>

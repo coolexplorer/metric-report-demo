@@ -1,5 +1,6 @@
 var testProfile = [
     {
+        "milestone": "MS15",
         "totalCCU": 49000,
         "pcCCU": 39100,
         "mobileCCU": 10800,
