@@ -1,4 +1,45 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
-  $('#dataTable').DataTable();
+  $('#ccpProfile').DataTable({
+    data: testProfile,
+    columns: [
+      { data: 'totalCCU' },
+      { data: 'pcCCU' },
+      { data: 'mobileCCU' }
+    ],
+    paging: false,
+    searching: false,
+    info: false
+  });
+});
+
+// Call the dataTables jQuery plugin
+$(document).ready(function() {
+  $('#testProfile').DataTable({
+    data: testProfile,
+    columns: [
+      { data: 'targetServer' },
+      { data: 'testStartTime' },
+      { data: 'duration' },
+      { data: 'rampupDuration' }
+    ],
+    paging: false,
+    searching: false,
+    info: false
+  });
+});
+
+
+// Call the dataTables jQuery plugin
+$(document).ready(function() {
+  $('#serverProfile').DataTable({
+    data: serverProfile,
+    columns: [
+      { data: 'serviceName' },
+      { data: 'version' },
+      { data: 'podCount' },
+      { data: 'serviceType' },
+      { data: 'createdAt' }
+    ]
+  });
 });

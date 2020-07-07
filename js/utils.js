@@ -87,7 +87,16 @@ var chartColors = [
 ]
 
 /* Get Data Set */
-function getDataSet(key, index) {
+function makeDataSets(data) {
+    var dataSets = [];
+    Object.keys(data).forEach(function(key) {
+        var index = Object.keys(data).indexOf(key);
+        dataSets.push(getDataSet(data, key, index));
+    });
+    return dataSets;
+}
+
+function getDataSet(data, key, index) {
   return {
     type: 'line',
     label: key,
@@ -98,7 +107,7 @@ function getDataSet(key, index) {
     borderCapStyle: 'round',
     pointHoverBorderWidth: 2,
     pointRadius: 0.5,
-    data: cpuData[key]
+    data: data[key]
   }
 }
 
