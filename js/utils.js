@@ -156,7 +156,7 @@ function getChartConfig(datasets) {
             labels: {
                 boxWidth: 10,
                 fontSize: 10,
-                fontColor: 'rgb(255, 99, 132)'
+                fontColor: 'rgb(0, 0, 0)'
             }
         },
         tooltips: {
