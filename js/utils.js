@@ -251,7 +251,7 @@ function getYAxesTick(yAxeType) {
 
 /* Date Converter */
 function changeDateString(isoString) {
-  return moment(isoString).format("YYYY-MM-DD HH:mm");
+  return moment.tz(isoString, "Asia/Seoul").format("YYYY-MM-DD HH:mm");
 }
 
 /* Change Y Axe Value */
