@@ -120,7 +120,7 @@ var chartColors = [
   "#b3b183",
   "#66506c",
   "#694700"
-]
+];
 
 /* Get Data Set */
 function makeDataSets(data) {
@@ -144,7 +144,7 @@ function getDataSet(data, key, index) {
     pointHoverBorderWidth: 2,
     pointRadius: 0.5,
     data: data[key]
-  }
+  };
 }
 
 function getChartConfig(datasets, yAxeType) {
@@ -195,12 +195,7 @@ function getChartConfig(datasets, yAxeType) {
             }],
             yAxes: [{
               type: 'linear',
-              ticks: {
-                min: 0,
-                callback: function(value, index, values) {
-                  return number_format(changeYAxeValue(yAxeType, value), 0) + getYAxePostfix(yAxeType);
-                }
-              }
+              ticks: getYAxesTick(yAxeType)
             }],
         },
         legend: {
@@ -236,12 +231,27 @@ function getChartConfig(datasets, yAxeType) {
             }
         }
     }
+  };
+}
+
+function getYAxesTick(yAxeType) {
+  var ticks = {
+    min: 0,
+    callback: function(value, index, values) {
+      return number_format(changeYAxeValue(yAxeType, value), 0) + getYAxePostfix(yAxeType);
+    }
+  };
+
+  if (yAxeType == "percent") {
+    ticks.max = 1;
   }
+
+  return ticks;
 }
 
 /* Date Converter */
 function changeDateString(isoString) {
-  return moment(isoString).format("YYYY-MM-DD HH:mm")
+  return moment(isoString).format("YYYY-MM-DD HH:mm");
 }
 
 /* Change Y Axe Value */
@@ -257,6 +267,6 @@ function getYAxePostfix(yAxeType) {
   if (yAxeType == "percent") {
     return "%";
   } else {
-    return "KB"
+    return "KB";
   }
 }
