@@ -106,25 +106,18 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" data-order='[[ 0, "asc" ]]' id="serverProfile" width="100%" cellspacing="0">
+                <table class="table table-bordered" data-order='[[ 0, "asc" ]]' id="serverMetric" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Service Name</th>
-                      <th>Version</th>
-                      <th>Pod Count</th>
-                      <th>Type</th>
-                      <th>Created At</th>
+                      <th rowspan="2">Service Name</th>
+                      <th>CPU</th>
+                      <th>Memory</th>
                     </tr>
-                  </thead>
-                  <tfoot>
                     <tr>
-                      <th>Service Name</th>
-                      <th>Version</th>
-                      <th>Pod Count</th>
-                      <th>Type</th>
-                      <th>Created At</th>
+                      <th>AVG / MIN / MAX</th>
+                      <th>AVG / MIN / MAX</th>
                     </tr>
-                  </tfoot>
+                </thead>
                   <tbody>
                   </tbody>
                 </table>
@@ -174,7 +167,7 @@
   <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="data/server_profile.js"></script>
+  <script src="data/server_metric.js"></script>
   <script src="js/datatables.js"></script>
 
 </body>

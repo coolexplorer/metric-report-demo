@@ -43,3 +43,17 @@ $(document).ready(function() {
     ]
   });
 });
+
+// Call the dataTables jQuery plugin
+$(document).ready(function() {
+  $('#serverMetric').DataTable({
+    pageLength: 100,
+    data: serverMetric,
+    columns: [
+      { data: 'serviceName' },
+      { data: 'cpu' },
+      { data: 'memory' }
+    ]
+  });
+});
+
