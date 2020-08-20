@@ -49,26 +49,31 @@ $(document).ready(function() {
   $('#serverMetric').DataTable({
     pageLength: 100,
     'rowCallback': function(row, data, index) {
-      console.log(data.cpu)
-      console.log(data.memory)
+      console.log(data.cpu);
+      console.log(data.memory);
       var reg = /([0-9.]*)% \/ ([0-9.]*)% \/ ([0-9.]*)%/i;
       var cpuMatchs = data.cpu.match(reg);
       var memMatchs = data.memory.match(reg);
 
+      console.log(cpuMatchs);
+      console.log(memMatchs);
+
+      var criteriaReg = /AVG \< ([0-9.]*)%\, MAX \< ([0-9.]*)%/i;
+      var cpuCriteriaMatchs = data.cpuCriteria.match(criteriaReg);
+      var memCriteriaMatchs = data.memCriteria.match(criteriaReg);
+
+      console.log(cpuCriteriaMatchs);
+      console.log(memCriteriaMatchs);
+
       var isCpuOverTarget = false;
       var isMemOverTarget = false;
+    
+      if (parseFloat(cpuMatchs[1]) >= parseFloat(cpuCriteriaMatchs[1]) || parseFloat(cpuMatchs[3]) >= parseFloat(cpuCriteriaMatchs[2])) {
+        isCpuOverTarget = true;
+      }
 
-      var cpuCriteria = parseFloat(data.cpuCriteria.replace('%', ''));
-      var memCriteria = parseFloat(data.memCriteria.replace('%', ''));
-
-      for (i=1; i < 4; i++) {
-        if (parseFloat(cpuMatchs[i]) >= cpuCriteria) {
-          isCpuOverTarget = true;
-        }
-
-        if (parseFloat(memMatchs[i]) >= memCriteria) {
-          isMemOverTarget = true;
-        }
+      if (parseFloat(memMatchs[1]) >= parseFloat(memCriteriaMatchs[1]) || parseFloat(memMatchs[3]) >= parseFloat(memCriteriaMatchs[2])) {
+        isMemOverTarget = true;
       }
 
       if (isCpuOverTarget) {
