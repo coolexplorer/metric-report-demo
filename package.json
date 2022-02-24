@@ -36,7 +36,7 @@
         "@fortawesome/fontawesome-free": "5.15.4",
         "datatables.net-bs4": "1.11.4",
         "chart.js": "2.9.4",
-        "jquery.easing": "^1.4.1",
+        "jquery.easing": "1.4.1",
         "moment": "2.29.1"
     },
     "devDependencies": {
@@ -46,7 +46,7 @@
         "gulp-autoprefixer": "7.0.1",
         "gulp-clean-css": "4.3.0",
         "gulp-header": "2.0.9",
-        "gulp-plumber": "^1.2.1",
+        "gulp-plumber": "1.2.1",
         "gulp-rename": "2.0.0",
         "gulp-sass": "5.1.0",
         "gulp-uglify": "3.0.2",
