@@ -31,8 +31,8 @@
         "url": "https://github.com/StartBootstrap/startbootstrap-sb-admin-2.git"
     },
     "dependencies": {
+        "bootstrap": "4.6.1",
         "@fortawesome/fontawesome-free": "5.15.4",
-        "bootstrap": "4.5.0",
         "datatables.net-bs4": "1.11.4",
         "chart.js": "2.9.4",
         "jquery": "3.5.1",
